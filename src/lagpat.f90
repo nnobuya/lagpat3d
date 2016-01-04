@@ -29,6 +29,7 @@ program lagpat
        & set_data
   use mod_fld , only: dt_max, fld
   use data3D
+
   implicit none
 
   !..main
@@ -57,7 +58,6 @@ program lagpat
   call ofile
 
   !..set fild data
-!  call set_data
   njob      = njobe
   nsub_step = 1
   call sekig_3D(0,ti)
@@ -69,11 +69,11 @@ program lagpat
   close(91)
 
 
-  call fld( ier, d_fld(:,:,:), t_fld(:,:,:), ye_fld(:,:,:), en_fld(:,:,:), &
-       & v_fld(:,:,:,:), v0_fld(:,:,:,:) )
+  call fld(ier, d_fld(:,:,:), t_fld(:,:,:), ye_fld(:,:,:), en_fld(:,:,:), &
+       & v_fld(:,:,:,:), v0_fld(:,:,:,:))
   ! out: all
 
-  call set_pt( istg, ti, ist_pt(:), id(:,:), x_pt(:,:), v_pt(:,:), d_fld(:,:,:) )
+  call set_pt(istg, ti, ist_pt(:), id(:,:), x_pt(:,:), v_pt(:,:), d_fld(:,:,:))
   !  out: all
 
 

@@ -58,9 +58,9 @@ contains
     close(io)
 
     !..check
-    if( x1_in > x1_out ) stop 'error: bad data #1 set_param @mod_set'
-    if( x2_in > x2_out ) stop 'error: bad data #2 set_param @mod_set'
-    if( x3_in > x3_out ) stop 'error: bad data #3 set_param @mod_set'
+    if (x1_in > x1_out .or. x2_in > x2_out .or. x3_in > x3_out) then
+       stop 'error: bad data #1 set_param @mod_set'
+    end if
 
     !..message
     write(*,'(a20,i10)') 'npt = :', npt
