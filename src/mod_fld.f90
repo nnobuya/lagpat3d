@@ -112,7 +112,7 @@ contains
 
     use mod_cnst, only: ndim
     use mod_set , only: nx1, nx2, nx3, i_test, x_fld
-    use data3D
+    use mod_data3d
     implicit none
 
     integer, intent(out):: ier, istep

@@ -1,7 +1,8 @@
-module unit
-!  K=c=G=1
-  implicit real(8)(a-h,o-z)
-  parameter( rho_uni = 5.80783413d18     &
+module mod_unit
+
+  implicit none
+
+  real(8), parameter:: rho_uni = 5.80783413d18 &
            ,rhoi_uni = 1.d0/rho_uni      &
            ,   t_uni = 1.60668219d-6     &
            ,  ti_uni = 1.d0/t_uni        &
@@ -20,5 +21,6 @@ module unit
            ,  chemev = 1.d0/1.60218d-6   &
            ,   e_uni = 5.829814713d53    &
            ,  dn_uni =   dndt_uni*t_uni  &
-           ,dmev_uni =   dedt_uni*t_uni  )
-end module unit
+           ,dmev_uni =   dedt_uni*t_uni
+
+end module mod_unit

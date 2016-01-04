@@ -22,7 +22,7 @@ subroutine output(istg, ti, dt, ipt, &
 
   !..physical quantities
   out_cond: if( istg == 1 .or. mod(istg,nout_lpt) == 0 ) then
-     write(op_file,'("../res/hydr/hydr.", i7.7, ".dat")') i_hydr
+     write(op_file,'("./res/hydr/hydr.", i7.7, ".dat")') i_hydr
      open(61, file = op_file, form = 'unformatted', action = 'write')
      !..write
      write(61) istg, real(ti), real(dt)
@@ -40,7 +40,7 @@ subroutine output(istg, ti, dt, ipt, &
   if ( mod(istg,n_anim) == 0 ) then
      write(63,'(f10.5)') ti *1.d3
 
-     write(op_file,'("../res/anim/anim.", i7.7, ".dat")') i_anim
+     write(op_file,'("./res/anim/anim.", i7.7, ".dat")') i_anim
      !..write
      open(64, file = op_file, action = 'write')
      do jpt = 1, npt

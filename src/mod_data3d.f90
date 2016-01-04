@@ -1,4 +1,4 @@
-module data3D
+module mod_data3d
 
   implicit none
 
@@ -19,4 +19,4 @@ module data3D
   & jproc  = 4, kproc  = jproc, lproc  = jproc, lp_sta = lproc/2
   integer, parameter:: lv_min = 1 , lv_trc = 2
 
-end module data3D
+end module mod_data3d

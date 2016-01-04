@@ -1,8 +1,10 @@
 subroutine sekig_3D(iflag0,t)
- use unit
- use mod_cnst
- use mod_set
- use data3D
+
+  use mod_unit
+  use mod_cnst
+  use mod_set
+  use mod_data3D
+
  implicit real(8) (a-h,o-z)
  integer omp_get_thread_num,omp_get_max_threads
  save j1ma,k1ma,l1ma,lv_max,jr34_min,jr34_max,kr34_min,kr34_max,lr34_min,lr34_max,job34

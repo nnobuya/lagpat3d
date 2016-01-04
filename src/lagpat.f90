@@ -28,7 +28,7 @@ program lagpat
        & d_fld, t_fld, ye_fld, en_fld, v_fld, v0_fld, &
        & set_data
   use mod_fld , only: dt_max, fld
-  use data3D
+  use mod_data3D
 
   implicit none
 
