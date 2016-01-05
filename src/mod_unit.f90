@@ -2,6 +2,9 @@ module mod_unit
 
   implicit none
 
+  private
+  public:: rho_uni, v_uni, tem_uni, r_uni, t_uni
+
   real(8), parameter:: rho_uni = 5.80783413d18 &
            ,rhoi_uni = 1.d0/rho_uni      &
            ,   t_uni = 1.60668219d-6     &

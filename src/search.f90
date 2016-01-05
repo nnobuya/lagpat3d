@@ -15,14 +15,6 @@ subroutine search(mode, xpt, vpt, fac, ipt)
   integer:: nd
   integer:: ipt_in(1:ndim)
   integer:: i, j, k, ier
-  logical, save:: initial = .true.
-
-  ! NN 2014/10/23 --start
-!  if (mode == 2 .and. initial) then
-!     write(*,*) '**WARNING** search() no Limiter in Z-direction'
-!     initial = .false.
-!  end if
-  ! NN 2014/10/23 --end
 
 
   ipt_in(1:ndim) = ipt(1:ndim)

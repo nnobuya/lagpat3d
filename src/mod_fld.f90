@@ -121,8 +121,6 @@ contains
          & ye_fld(nx1,nx2,nx3), en_fld(nx1,nx2,nx3), &
          & v_fld(ndim,nx1,nx2,nx3)
 
-    real   :: ti_in, fld_in(1:nx1,1:nx2,1:nx3)
-    integer:: i, j, k, k2, k3
 
     ier   = 0
     istep = 0

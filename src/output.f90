@@ -1,5 +1,5 @@
 subroutine output(istg, ti, dt, ipt, &
-     & ist_pt, ist_at, x_pt, d_pt, t_pt, ye_pt, en_pt, v_pt, n_anim_out )
+     & ist_pt, x_pt, d_pt, t_pt, ye_pt, en_pt, v_pt, n_anim_out )
 
   use mod_cnst, only: npt, ndim
   use mod_set , only: nout_lpt, n_anim
@@ -7,7 +7,7 @@ subroutine output(istg, ti, dt, ipt, &
   implicit none
 
   !..io
-  integer, intent(in):: istg, ist_pt(1:npt), ist_at(1:npt), ipt(1:ndim,1:npt)
+  integer, intent(in):: istg, ist_pt(1:npt), ipt(1:ndim,1:npt)
   real(8), intent(in):: ti, dt, x_pt(1:ndim,npt), v_pt(ndim,npt), &
        & d_pt(npt), t_pt(npt), ye_pt(npt), en_pt(npt)
   integer, intent(inout):: n_anim_out
@@ -16,7 +16,7 @@ subroutine output(istg, ti, dt, ipt, &
   integer:: npt_in, npt_out, npt_num
   integer, save:: i_hydr = 1
   integer, save:: i_anim = 1
-  integer:: i, jpt
+  integer  :: jpt
   character:: op_file*100
 
 

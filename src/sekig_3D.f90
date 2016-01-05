@@ -27,7 +27,7 @@ subroutine sekig_3D(iflag0,t)
   integer:: jg, kg, lg, jr, kr, lr, ierr
   integer:: job31, job32, job33
   integer:: job40, job41, job42, job43, job44, job45, job46
-  integer:: jr_max, jr31_min, jr31_max, jr32_max, jr32_min
+  integer:: jr31_min, jr31_max, jr32_max, jr32_min
 
   integer:: lr32_max, lr32_min, lr33_max, lr33_min, lv
   integer:: lvf

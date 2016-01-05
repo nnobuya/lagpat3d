@@ -1,4 +1,4 @@
-subroutine set_pt( istg, ti, ist_pt, id, x_pt, v_pt, d_fld )
+subroutine set_pt(istg, ti, ist_pt, id, x_pt, v_pt, d_fld)
 
   use mod_cnst, only: npt, npt_x1, npt_x2, npt_x3, ndim
   use mod_set , only: k_zoku, dma, nx1, nx2, nx3, x_fld, dx_fld
@@ -6,13 +6,13 @@ subroutine set_pt( istg, ti, ist_pt, id, x_pt, v_pt, d_fld )
   implicit none
 
   !..io
-  integer, intent(out)         :: istg, id(1:ndim,1:npt), ist_pt(npt)
+  integer, intent(out):: istg, id(1:ndim,1:npt), ist_pt(npt)
   real(8), intent(out):: ti, x_pt(1:ndim,1:npt), v_pt(1:ndim,1:npt)
 
   !..local
-  real            :: ti_in, fld_in(1:nx1,1:nx2,1:nx3)
+  !real   :: ti_in, fld_in(1:nx1,1:nx2,1:nx3)
   real(8):: d_fld(1:nx1,1:nx2,1:nx3)
-  integer:: i, j, k, i_tmp, j_tmp, ier, ihyd, ipt, nskip1, nskip2, nskip3
+  integer:: i, j, k, i_tmp, j_tmp, ipt, nskip1, nskip2, nskip3
 
 
   if      ( k_zoku == 0 ) then
@@ -75,6 +75,7 @@ subroutine set_pt( istg, ti, ist_pt, id, x_pt, v_pt, d_fld )
   end if
 
 
+  id(1:ndim,1:npt) = 0
 
   return
 

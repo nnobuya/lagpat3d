@@ -2,6 +2,13 @@ module mod_data3d
 
   implicit none
 
+  private
+  public:: nsub_step, njob, njobs, njobe, inode, &
+       & lv_min, lp_sta, hoge, lv_trc, jproc, kproc, lproc, &
+       & js34, je34, j34s, ks34, ke34, k34s, ls34, le34, l34s, &
+       & jc, kc, lc, x, y, z, time, qrho, ye, tem, &
+       & vlx, vly, vlz, sen, itable,fn
+
 
   integer njob, nsub_step
   integer,allocatable :: itable(:,:,:)

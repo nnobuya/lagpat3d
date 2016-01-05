@@ -23,7 +23,7 @@
 
 program lagpat
 
-  use mod_cnst, only: npt, ndim
+  use mod_cnst, only: npt, ndim, set_cnst
   use mod_set , only: int_t, i_test, last_lp, &
        & d_fld, t_fld, ye_fld, en_fld, v_fld, v0_fld, &
        & set_data
@@ -33,15 +33,20 @@ program lagpat
   implicit none
 
   !..main
-  integer:: ist_pt(1:npt), ist_at(1:npt)
-  integer:: ipt(1:ndim,1:npt), id(1:ndim,1:npt)
-  real(8), dimension(1:npt)           :: d_pt, t_pt, ye_pt, en_pt
-  real(8), dimension(1:ndim,1:npt)    :: x_pt, v_pt
-  real(8), dimension(1:ndim,0:4,1:npt):: v_pt_p
+  !integer:: ist_pt(1:npt)
+  !integer:: ipt(1:ndim,1:npt), id(1:ndim,1:npt)
+  !real(8), dimension(1:npt)           :: d_pt, t_pt, ye_pt, en_pt
+  !real(8), dimension(1:ndim,1:npt)    :: x_pt, v_pt
+  !real(8), dimension(1:ndim,0:4,1:npt):: v_pt_p
+
+  !..main
+  integer, allocatable:: ist_pt(:), ipt(:,:), id(:,:)
+  real(8), allocatable:: d_pt(:), t_pt(:), ye_pt(:), en_pt(:), &
+       & x_pt(:,:), v_pt(:,:), v_pt_p(:,:,:)
 
   !..local
   integer:: istg, n_anim_out = 0
-  integer:: j, ier
+  integer:: ier
   real(8):: ti, dt0, dt_in, dt = 0.d0
 
 
@@ -56,6 +61,17 @@ program lagpat
 
   !..open files
   call ofile
+
+
+  !..allocation
+
+  call set_cnst
+
+  allocate(ist_pt(1:npt), ipt(1:ndim,1:npt), id(1:ndim,1:npt), &
+       & d_pt(1:npt), t_pt(1:npt), ye_pt(1:npt), en_pt(1:npt), &
+       & x_pt(1:ndim,1:npt), v_pt(1:ndim,1:npt), &
+       & v_pt_p(1:ndim,0:4,1:npt), stat=ier)
+  if (ier /= 0) stop 'lagpat(): allocation error'
 
 
   !..set field data
@@ -96,14 +112,6 @@ program lagpat
   !     pre-process                                                    !
   ! ------------------------------------------------------------------ !
 
-  do j = 1, npt
-     if ( d_pt(j) <= 1.d6 ) then
-        ist_at(j) = 0
-     else
-        ist_at(j) = 1
-     end if
-  end do
-
 
   ! ------------------------------------------------------------------ !
   !                                                                    !
@@ -125,7 +133,7 @@ program lagpat
      !     output                                                      !
      ! --------------------------------------------------------------- !
 
-     call output( istg, ti, dt, ipt(:,:), ist_pt(:), ist_at(:), &
+     call output( istg, ti, dt, ipt(:,:), ist_pt(:), &
           & x_pt(:,:), d_pt(:), t_pt(:), ye_pt(:), en_pt(:), v_pt(:,:), &
           & n_anim_out )
      !    in: others
