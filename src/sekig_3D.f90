@@ -1,20 +1,42 @@
 subroutine sekig_3D(iflag0,t)
 
   use mod_unit
-  use mod_cnst
-  use mod_set
-  use mod_data3D
+  use mod_cnst ! , only: ndim
+  use mod_set  ! , only: x_fld, dx_fld, v_fld, v0_fld, &
+ ! & d_fld, t_fld, ye_fld, en_fld
+  use mod_data3D!, only: js34, je34, j34s, ks34, ke34, k34s, ls34, le34, l34s, &
+ ! & jc, kc, lc, x, y, z, time, qrho, ye, tem, vlx, vly, vlz, sen, itable,fn
 
- implicit real(8) (a-h,o-z)
- integer omp_get_thread_num,omp_get_max_threads
- save j1ma,k1ma,l1ma,lv_max,jr34_min,jr34_max,kr34_min,kr34_max,lr34_min,lr34_max,job34
- !---- nishimura subroutine
- real(8), allocatable:: x_fld_in(:,:)
+  !implicit real(8) (a-h,o-z)
+  implicit none
 
- !..file names
- character*10:: no_index, no_index2
- character*50, parameter:: eos_name = 'SFHo', mass_name = '135-135'
- character*99, parameter:: dir_path = '/misc/work250/nishmrnb/ns_merger/'
+  integer:: omp_get_thread_num, omp_get_max_threads
+  integer, save:: j1ma, k1ma, l1ma, lv_max, jr34_min, jr34_max, &
+      & kr34_min, kr34_max, lr34_min, lr34_max, job34
+
+
+  !..local
+  integer:: iflag0, iend_thr, imax, imin, irank, ista_thr
+  integer:: iwork1, iwork2
+  real(8):: t, dlx0
+
+  integer:: i, j, k, l, ii, nn, nphi, nrr, nth, nx_max
+  integer:: j1, j2, j3, k1, k2, k3, l1, l2, l3
+  integer:: jg, kg, lg, jr, kr, lr, ierr
+  integer:: job31, job32, job33, job40, job41, job42, job43, job44, job45, job46
+  integer:: jr_max, jr31_min, jr31_max, jr32_max, jr32_min
+  integer:: lr32_max, lr32_min, lr33_max, lr33_min, lv
+  integer:: lvf
+  integer:: max_thr, maxs, my_thr
+  integer:: ju3, kr31_max, kr31_min, kr33_max, kr33_min
+
+  !---- nishimura subroutine
+  real(8), allocatable:: x_fld_in(:,:)
+
+  !..file names
+  character*10:: no_index, no_index2
+  character*50, parameter:: eos_name = 'SFHo', mass_name = '135-135'
+  character*99, parameter:: dir_path = '/misc/work250/nishmrnb/ns_merger/'
 
 
 

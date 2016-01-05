@@ -2,6 +2,7 @@ module mod_data3d
 
   implicit none
 
+
   integer njob, nsub_step
   integer,allocatable :: itable(:,:,:)
   character(100):: fn
@@ -10,8 +11,8 @@ module mod_data3d
   integer, allocatable:: ls34(:),le34(:),l34s(:)
   integer, allocatable:: jc(:),kc(:),lc(:)
   real(4), allocatable:: x(:,:),y(:,:),z(:,:),time(:)
-  real(4), allocatable:: qrho(:,:,:,:,:),VLX(:,:,:,:,:),VLY(:,:,:,:,:),VLZ(:,:,:,:,:),&
-                        ye  (:,:,:,:,:),tem(:,:,:,:,:),sen(:,:,:,:,:)
+  real(4), allocatable:: qrho(:,:,:,:,:),VLX(:,:,:,:,:),VLY(:,:,:,:,:), &
+  & VLZ(:,:,:,:,:), ye(:,:,:,:,:), tem(:,:,:,:,:), sen(:,:,:,:,:)
   real(4) hoge
 
   !--- xyz SFHo 1.35-1.35

@@ -12,7 +12,7 @@
 !             2013/01/28                                               !
 !             2014/10/21                                               !
 !                                                                      !
-! input : hydro Result: LAGPAT/lag_*.dat => Sekiguchi 3D data          *
+! input : hydro Result: LAGPAT/lag_*.dat => Sekiguchi 3D data          !
 !         ./in.dat                                                     !
 !                                                                      !
 ! output: ./part/*.dat                                                 !
@@ -27,8 +27,8 @@ program lagpat
   use mod_set , only: int_t, i_test, last_lp, &
        & d_fld, t_fld, ye_fld, en_fld, v_fld, v0_fld, &
        & set_data
-  use mod_fld , only: dt_max, fld
-  use mod_data3D
+  use mod_fld   , only: dt_max, fld
+  use mod_data3D, only: njob, njobe, nsub_step
 
   implicit none
 
@@ -57,7 +57,8 @@ program lagpat
   !..open files
   call ofile
 
-  !..set fild data
+
+  !..set field data
   njob      = njobe
   nsub_step = 1
   call sekig_3D(0,ti)
