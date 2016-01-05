@@ -19,7 +19,7 @@ PRG	:= lagpat
 
 MAIN	:= $(PRG:%=%.f90)
 
-SRCMOD	:= unit_mod.f90 data3D_mod.f90 mod_cnst.f90 mod_set.f90 mod_fld.f90
+SRCMOD	:= mod_unit.f90 mod_data3d.f90 mod_cnst.f90 mod_set.f90 mod_fld.f90
 
 MOD	:= $(SRCMOD:%.f90=%.mod)
 
