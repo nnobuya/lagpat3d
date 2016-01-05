@@ -10,6 +10,7 @@ module mod_set
        & x1_in, x1_out, x2_in, x2_out, x3_in, x3_out, &
        & set_param, nx1, nx2, nx3, &
        & d_fld, t_fld, ye_fld, en_fld, x_fld, dx_fld, dma, v_fld, v0_fld, &
+       & dir_path, eos_name, mass_name, &
        & set_data
 
   integer:: k_zoku, i_test, last_lp, int_t, int_x, nin, nou
@@ -28,6 +29,8 @@ module mod_set
   real(8), dimension(:,:,:,:), allocatable:: x_fld, v_fld, v0_fld
 
   real(8):: dma(1:npt)
+  character:: dir_path*100, eos_name*50, mass_name*50
+
 
 contains
 
@@ -40,6 +43,11 @@ contains
 
 
     !..calculation Parametar form './in.dat'
+    read(io,*)
+    read(io,*) eos_name, mass_name
+    read(io,*)
+    read(io,*) dir_path
+    read(io,*)
     read(io,*)
     read(io,*) k_zoku, i_test, last_lp, int_t, int_x, nin, nou
     read(io,*)

@@ -3,7 +3,8 @@ subroutine sekig_3D(iflag0,t)
   use mod_unit, only: rho_uni, v_uni, tem_uni, r_uni, t_uni
   use mod_cnst, only: ndim
   use mod_set , only: nx1, nx2, nx3, x_fld, dx_fld, &
-       & v_fld, v0_fld, d_fld, t_fld, ye_fld, en_fld
+       & v_fld, v0_fld, d_fld, t_fld, ye_fld, en_fld, &
+       & dir_path, eos_name, mass_name
   use mod_data3D, only: nsub_step, njob, njobs, inode, &
        & lv_min, lp_sta, hoge, lv_trc, jproc, kproc, lproc, &
        & js34, je34, j34s, ks34, ke34, k34s, ls34, le34, l34s, &
@@ -38,8 +39,7 @@ subroutine sekig_3D(iflag0,t)
 
   !..file names
   character*10:: no_index, no_index2
-  character*50, parameter:: eos_name = 'SFHo', mass_name = '135-135'
-  character*99, parameter:: dir_path = '/misc/work250/nishmrnb/ns_merger/'
+
 
 
 
@@ -64,8 +64,9 @@ subroutine sekig_3D(iflag0,t)
         !write(fn,'(a56,i2.2)')"/misc/work112/sekgchyi/Tracer/SFHo/Dat/grd_SFHo_135-135_",njob
         write(no_index,'(i2.2)') njob
         fn = trim(adjustl(dir_path)) // trim(adjustl(eos_name)) // '/' // &
-             & trim(adjustl(mass_name)) // '/Dat/grd_' // trim(adjustl(eos_name)) &
-             & // '_' // trim(adjustl(mass_name)) // '_' // trim(adjustl(no_index))
+             & trim(adjustl(mass_name)) // '/Dat/grd_' &
+             & // trim(adjustl(eos_name)) // '_' // trim(adjustl(mass_name)) &
+             & // '_' // trim(adjustl(no_index))
 
         open(38,file=fn,status='old')
 

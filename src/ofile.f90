@@ -14,10 +14,6 @@ subroutine ofile
 
   open(15, file = './in/lagpat.in', action = 'read')
 
-  read(15,*)
-  read(15,*) path
-  read(15,*)
-
   call set_param(15)
 
   !     input                                                          !
