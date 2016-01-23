@@ -33,16 +33,9 @@ program lagpat
   implicit none
 
   !..main
-  !integer:: ist_pt(1:npt)
-  !integer:: ipt(1:ndim,1:npt), id(1:ndim,1:npt)
-  !real(8), dimension(1:npt)           :: d_pt, t_pt, ye_pt, en_pt
-  !real(8), dimension(1:ndim,1:npt)    :: x_pt, v_pt
-  !real(8), dimension(1:ndim,0:4,1:npt):: v_pt_p
-
-  !..main
   integer, allocatable:: ist_pt(:), ipt(:,:), id(:,:)
   real(8), allocatable:: d_pt(:), t_pt(:), ye_pt(:), en_pt(:), &
-       & x_pt(:,:), v_pt(:,:), v_pt_p(:,:,:)
+       & x_pt(:,:), v_pt(:,:), v_pt_p(:,:,:), dma(:)
 
   !..local
   integer:: istg, n_anim_out = 0
@@ -70,7 +63,7 @@ program lagpat
   allocate(ist_pt(1:npt), ipt(1:ndim,1:npt), id(1:ndim,1:npt), &
        & d_pt(1:npt), t_pt(1:npt), ye_pt(1:npt), en_pt(1:npt), &
        & x_pt(1:ndim,1:npt), v_pt(1:ndim,1:npt), &
-       & v_pt_p(1:ndim,0:4,1:npt), stat=ier)
+       & v_pt_p(1:ndim,0:4,1:npt), dma(1:npt), stat=ier)
   if (ier /= 0) stop 'lagpat(): allocation error'
 
 
@@ -90,9 +83,9 @@ program lagpat
        & v_fld(:,:,:,:), v0_fld(:,:,:,:))
   ! out: all
 
-  call set_pt(istg, ti, ist_pt(:), id(:,:), x_pt(:,:), v_pt(:,:), d_fld(:,:,:))
+  call set_pt(istg, ti, ist_pt(:), id(:,:), dma(:), &
+  & x_pt(:,:), v_pt(:,:), d_fld(:,:,:))
   !  out: all
-
 
   call hokan_main(1, dt_max, ist_pt(:), ipt(:,:), x_pt(:,:), &
        & d_fld(:,:,:), t_fld(:,:,:), ye_fld(:,:,:), en_fld(:,:,:), &
@@ -235,7 +228,7 @@ program lagpat
   write(*,'(a20,i10)') 'calculation step:', istg
   write(*,'(a20,i10)') 'output:', n_anim_out
 
-  call fini_out( istg, ti, ist_pt(:), id(:,:), x_pt(:,:), v_pt(:,:) )
+  call fini_out(istg, ti, ist_pt(:), id(:,:), dma(:), x_pt(:,:), v_pt(:,:))
 
   close(90)
 
