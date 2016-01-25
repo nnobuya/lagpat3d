@@ -16,6 +16,15 @@ subroutine set_pt(istg, ti, ist_pt, id, dma, x_pt, v_pt, d_fld)
 
   if      ( k_zoku == 0 ) then
 
+     !..tmp
+     write(100) npt_x1, npt_x2, npt_x3
+     write(100) nx1, nx2, nx3
+     write(100) x_fld(1:ndim,1:nx1,1:nx2,1:nx3)
+     write(100) d_fld(1:nx1,1:nx2,1:nx3)
+     write(100) dx_fld(1:ndim,1:max(max(nx1,nx2),nx3))
+     !--------------------------------
+
+
      x_pt   = 0.d0
      nskip1 = nx1/npt_x1
      nskip2 = nx2/npt_x2
@@ -56,6 +65,8 @@ subroutine set_pt(istg, ti, ist_pt, id, dma, x_pt, v_pt, d_fld)
      end do
 
      close(60)
+
+     stop 'db: set_pt'
 
   else if ( k_zoku == 1 ) then
 

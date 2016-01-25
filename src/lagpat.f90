@@ -72,7 +72,6 @@ program lagpat
   nsub_step = 1
   call sekig_3D(0,ti)
 
-
   close(41)
   close(42)
   close(60)
@@ -86,7 +85,7 @@ program lagpat
   call set_pt(istg, ti, ist_pt(:), id(:,:), dma(:), &
   & x_pt(:,:), v_pt(:,:), d_fld(:,:,:))
   !  out: all
-
+  stop 'end test db'
   call hokan_main(1, dt_max, ist_pt(:), ipt(:,:), x_pt(:,:), &
        & d_fld(:,:,:), t_fld(:,:,:), ye_fld(:,:,:), en_fld(:,:,:), &
        & v0_fld(:,:,:,:), v_fld(:,:,:,:), &

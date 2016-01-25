@@ -115,14 +115,14 @@ contains
     do k = 1, nx3
        do j = 1, nx2
           do i = 1, nx1
-             x_fld(1,i,j,k) = dble( x_fld_in(1,i) )
-             x_fld(2,i,j,k) = dble( x_fld_in(2,j) )
-             x_fld(3,i,j,k) = dble( x_fld_in(3,k) )
+             x_fld(1,i,j,k) = dble(x_fld_in(1,i))
+             x_fld(2,i,j,k) = dble(x_fld_in(2,j))
+             x_fld(3,i,j,k) = dble(x_fld_in(3,k))
           end do
        end do
     end do
 
-    deallocate( x_fld_in )
+    deallocate(x_fld_in)
 
 
     dx_fld(1,1) = x_fld(1,1,1,1)
@@ -130,20 +130,20 @@ contains
     dx_fld(3,1) = x_fld(3,1,1,1)
 
 
-    if( nx1 >= 2 ) then
+    if(nx1 >= 2) then
        dx_fld(1,2:nx1) = x_fld(1,2:nx1,1,1) - x_fld(1,1:nx1-1,1,1)
     else
        dx_fld(1,1:nx1) = 0.d0
     end if
 
-    if( nx2 >= 2 ) then
+    if (nx2 >= 2) then
        dx_fld(2,2:nx2) = x_fld(2,1,2:nx2,1) - x_fld(2,1,1:nx2-1,1)
     else
        dx_fld(2,1:nx2) = 0.d0
     end if
 
-    if( nx3 >= 2 ) then
-       dx_fld(3,2:nx3) = x_fld(3,1,2:nx2,1) - x_fld(3,1,1:nx2-1,1)
+    if (nx3 >= 2) then
+       dx_fld(3,2:nx3) = x_fld(3,1,1,2:nx3) - x_fld(3,1,1,1:nx3-1)
     else
        dx_fld(3,1:nx3) = 0.d0
     end if

@@ -41,27 +41,12 @@ subroutine sekig_3D(iflag0,t)
   character*10:: no_index, no_index2
 
 
-
-
   if (iflag0 /= 0) then
 
      if( nsub_step == 1 )then
-
-!    allocate(itable(0:jproc-1,0:kproc-1,0:lproc-1))
-!    irank = 0 
-!    do l = lp_sta, lproc - 1
-!     do k = 0, kproc - 1
-!      do j = 0, jproc - 1
-!       itable(j,k,l) = irank
-!       irank = irank + 1
-!      end do
-!     end do
-!    end do
-
         write(*,'(" Read Sekiguchi 3D data, job number =", i3, &
              & " FMR level for tracer =", i2)') njob,lv_trc
 
-        !write(fn,'(a56,i2.2)')"/misc/work112/sekgchyi/Tracer/SFHo/Dat/grd_SFHo_135-135_",njob
         write(no_index,'(i2.2)') njob
         fn = trim(adjustl(dir_path)) // trim(adjustl(eos_name)) // '/' // &
              & trim(adjustl(mass_name)) // '/Dat/grd_' &
@@ -78,23 +63,22 @@ subroutine sekig_3D(iflag0,t)
              job31,job32,job33,job34,job40,job41,job42,job43,job44,job45,job46
         close(38)
 
-!    allocate(js34(jr34_min:jr34_max),je34(jr34_min:jr34_max),j34s(jr34_min:jr34_max))
-!    allocate(ks34(kr34_min:kr34_max),ke34(kr34_min:kr34_max),k34s(kr34_min:kr34_max))
-!    allocate(ls34(lr34_min:lr34_max),le34(lr34_min:lr34_max),l34s(lr34_min:lr34_max))
-
         do jr = jr34_min, jr34_max
            do kr = kr34_min, kr34_max
               do lr = lr34_min, lr34_max
                  i = itable(jr,kr,lr)
-        !write(fn,"(a58,i2.2,a1,i4.4)")'/misc/work112/sekgchyi/Tracer/SFHo/Con3D/xyz_SFHo_135-135_',njob,'_',itable(jr,kr,lr)
                  write(no_index ,'(i2.2)') njob
                  write(no_index2,'(i4.4)') itable(jr,kr,lr)
-                 fn = trim(adjustl(dir_path)) // trim(adjustl(eos_name)) // '/' // &
-                      & trim(adjustl(mass_name)) // '/Con3D/xyz_' // trim(adjustl(eos_name)) &
-                      & // '_' // trim(adjustl(mass_name)) // '_' // trim(adjustl(no_index)) // '_' // trim(adjustl(no_index2))
+                 fn = trim(adjustl(dir_path)) // trim(adjustl(eos_name)) &
+                      & // '/' // trim(adjustl(mass_name)) // '/Con3D/xyz_' &
+                      & // trim(adjustl(eos_name)) // '_' // &
+                      & trim(adjustl(mass_name)) // '_' // &
+                      & trim(adjustl(no_index)) // '_' // &
+                      & trim(adjustl(no_index2))
 
                  open(134+i,file=fn,form='unformatted',status="old")
-                 read(134+i)js34(jr),je34(jr),j34s(jr),ks34(kr),ke34(kr),k34s(kr),ls34(lr),le34(lr),l34s(lr)
+                 read(134+i) js34(jr), je34(jr), j34s(jr), ks34(kr), &
+                      & ke34(kr), k34s(kr), ls34(lr), le34(lr), l34s(lr)
               end do
            end do
         end do
@@ -113,15 +97,10 @@ subroutine sekig_3D(iflag0,t)
         l1ma  = ( l2 - l1 )/l3 + 1
 
         if( j1ma /= nx1 .or. k1ma /= nx2 .or. l1ma /= nx3 )then
-           write(*,'(" Invalid grid number in sekig 3D =",6i3)')j1ma,nx1,k1ma,nx2,l1ma,nx3
+           write(*,'(" Invalid grid number in sekig 3D =",6i3)')&
+               & j1ma,nx1,k1ma,nx2,l1ma,nx3
            stop
         endif
-
-!     allocate(jc(j1:j2),kc(k1:k2),lc(l1:l2),time(job34))
-!     allocate(x (j1ma,lv_min:lv_max),y(k1ma,lv_min:lv_max),z(l1ma,lv_min:lv_max))
-!     allocate(qrho(j1ma,k1ma,l1ma,lv_min:lv_max),VLX(j1ma,k1ma,l1ma,lv_min:lv_max),&
-!              VLY (j1ma,k1ma,l1ma,lv_min:lv_max),VLZ(j1ma,k1ma,l1ma,lv_min:lv_max),&
-!              tem (j1ma,k1ma,l1ma,lv_min:lv_max),ye (j1ma,k1ma,l1ma,lv_min:lv_max))
 
         j1 = 1
         do jr = jr34_min, jr34_max
