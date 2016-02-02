@@ -103,6 +103,7 @@ contains
     end if
 
 
+
     return
 
   end subroutine fld
@@ -133,72 +134,6 @@ contains
     v_fld (3,1:nx1,1:nx2,1:nx3) = dble( vlz (nsub_step,1:nx1,1:nx2,1:nx3,lv_trc) )
     ye_fld(  1:nx1,1:nx2,1:nx3) = dble( ye  (nsub_step,1:nx1,1:nx2,1:nx3,lv_trc) )
     en_fld(  1:nx1,1:nx2,1:nx3) = dble( sen (nsub_step,1:nx1,1:nx2,1:nx3,lv_trc) )
-
-!write(1000,*)
-!write(1001,*)
-!write(1002,*)
-!do j = 1, nx2
-!write(1000,*)
-!write(1001,*)
-!write(1002,*)
-!do i = 1, nx1
-!k=nx3
-!k2=nx3-1
-!k3=nx3-2
-!write(1000,'(99es12.3)')x_fld(1,i,j,k),x_fld(2,i,j,k),x_fld(3,i,j,k) &
-!,d_fld(i,j,k),t_fld(i,j,k),ye_fld(i,j,k),en_fld(i,j,k),v_fld(1,i,j,k),v_fld(2,i,j,k),v_fld(3,i,j,k)
-!write(1000,'(99es12.3)')x_fld(1,i,j,k),x_fld(2,i,j,k),x_fld(3,i,j,k),v_fld(3,i,j,k)
-!write(1001,'(99es12.3)')x_fld(1,i,j,k2),x_fld(2,i,j,k2),x_fld(3,i,j,k2),v_fld(3,i,j,k2)
-!write(1002,'(99es12.3)')x_fld(1,i,j,k3),x_fld(2,i,j,k3),x_fld(3,i,j,k3),v_fld(3,i,j,k3)
-!end do
-!end do
-
-!j = nx2/2
-!write(1003,*)
-!do k = 1, nx3
-!write(1003,*)
-!do i = 1, nx1
-!write(1003,'(2i,99es12.3)')x_fld(1,i,j,k),x_fld(2,i,j,k),x_fld(3,i,j,k) &
-!,d_fld(i,j,k),t_fld(i,j,k),ye_fld(i,j,k),en_fld(i,j,k),v_fld(1,i,j,k),v_fld(2,i,j,k),v_fld(3,i,j,k)
-!write(1003,'(99es12.3)')x_fld(1,i,j,k),x_fld(2,i,j,k),x_fld(3,i,j,k),v_fld(3,i,j,k)
-!end do
-!end do
-
-    !--- do we need istep, ier ?
-!    read(54,iostat=ier) istep, ti_in
-!    if (ier /= 0) return
-
-!    read(54) fld_in(1:nx1,1:nx2,1:nx3)
-!    ti = dble( ti_in )
-!    d_fld(1:nx1,1:nx2,1:nx3) = dble( fld_in(1:nx1,1:nx2,1:nx3) )
-
-
-!    read(55,iostat=ier) istep, ti_in
-!    if ( ier /= 0 ) return
-!    read(55) fld_in(1:nx1,1:nx2,1:nx3)
-!    ti = dble( ti_in )
-!    t_fld(1:nx1,1:nx2,1:nx3) = dble( fld_in(1:nx1,1:nx2,1:nx3) )
- !   do i = 1, ndim
- !      read(50+i,iostat=ier) istep, ti_in
- !      if ( ier /= 0 ) return
- !      read(50+i) fld_in(1:nx1,1:nx2,1:nx3)
- !      ti = dble( ti_in )
- !      v_fld(i,1:nx1,1:nx2,1:nx3) = dble( fld_in(1:nx1,1:nx2,1:nx3) )
- !   end do
-
-!    read(56,iostat=ier) istep, ti_in
-!    if ( ier /= 0 ) return
-!    read(56) fld_in(1:nx1,1:nx2,1:nx3)
-!    ti = dble( ti_in )
-!    ye_fld(1:nx1,1:nx2,1:nx3) = dble( fld_in(1:nx1,1:nx2,1:nx3) )
-
-
-!    read(57,iostat=ier) istep, ti_in
-!    if ( ier /= 0 ) return
-!    read(57) fld_in(1:nx1,1:nx2,1:nx3)
-!    ti = dble( ti_in )
-!    en_fld(1:nx1,1:nx2,1:nx3) = dble( fld_in(1:nx1,1:nx2,1:nx3) )
-
 
     return
 

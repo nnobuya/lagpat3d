@@ -9,9 +9,15 @@
 # ====================================================================== #
 
 FC	:= ifort
+#FC	:= gfortran
 
-FCFLAGS	:= -O3 -heap-arrays -convert big_endian -openmp
+ifeq ($(FC),ifort)
+	FCFLAGS	:= -O3 -heap-arrays -convert big_endian -openmp
+       #-check all -warn all -traceback
      #-CB -traceback -g #-check all -warn all -traceback
+else
+	FCFLAGS	:= -O3 -fconvert=big-endian -fopenmp
+endif
 
 EXE	:= ../lagpat3d
 

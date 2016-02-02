@@ -4,8 +4,9 @@ subroutine sekig_3D(iflag0,t)
   use mod_cnst, only: ndim
   use mod_set , only: nx1, nx2, nx3, x_fld, dx_fld, &
        & v_fld, v0_fld, d_fld, t_fld, ye_fld, en_fld, &
+       & njobs, njobe, inode, &
        & dir_path, eos_name, mass_name
-  use mod_data3D, only: nsub_step, njob, njobs, inode, &
+  use mod_data3D, only: nsub_step, njob, &
        & lv_min, lp_sta, hoge, lv_trc, jproc, kproc, lproc, &
        & js34, je34, j34s, ks34, ke34, k34s, ls34, le34, l34s, &
        & jc, kc, lc, x, y, z, time, qrho, ye, tem, &
@@ -361,7 +362,6 @@ subroutine sekig_3D(iflag0,t)
      nx1 = j1ma
      nx2 = k1ma
      nx3 = l1ma
-!    read(50) nx1, nx2, nx3
 
      nx_max = max( max( nx1, nx2 ), nx3 )
      allocate ( x_fld_in(1:ndim,1:nx_max), &
@@ -385,12 +385,6 @@ subroutine sekig_3D(iflag0,t)
         x_fld_in(3,l) = z(l,lv_trc)*r_uni
      end do
 
-!    read(50) x_fld_in(1,1:nx1)
-!    read(50) x_fld_in(2,1:nx2)
-!    read(50) x_fld_in(3,1:nx3)
-
-!    close(50)
-
      do k = 1, nx3
         do j = 1, nx2
            do i = 1, nx1
@@ -401,41 +395,25 @@ subroutine sekig_3D(iflag0,t)
         end do
      end do
 
-     deallocate( x_fld_in )
-
-!    if ( i_test == 1 ) then
-!       write(80,*) nx1, nx2, nx3
-!       do k = 1, nx3
-!          do j = 1, nx2
-!             do i = 1, nx1
-!                write(80,*) x_fld(1,i,j,k), x_fld(2,i,j,k), x_fld(3,i,j,k)
-!             end do
-!          end do
-!       end do
-!    end if
+     deallocate(x_fld_in)
 
 
-     dx_fld(1,1) = x_fld(1,1,1,1)
-     dx_fld(2,1) = x_fld(2,1,1,1)
-     dx_fld(3,1) = x_fld(3,1,1,1)
-
-
-     if( nx1 >= 2 ) then
-        dx_fld(1,2:nx1) = x_fld(1,2:nx1,1,1) - x_fld(1,1:nx1-1,1,1)
+     if (nx1 >= 2) then
+        dx_fld(1,1:nx1-1) = x_fld(1,2:nx1,1,1) - x_fld(1,1:nx1-1,1,1)
      else
-        dx_fld(1,1:nx1) = 0.d0
+        dx_fld(1,1:nx1-1) = 0.d0
      end if
 
-     if( nx2 >= 2 ) then
-        dx_fld(2,2:nx2) = x_fld(2,1,2:nx2,1) - x_fld(2,1,1:nx2-1,1)
+     if (nx2 >= 2) then
+        dx_fld(2,1:nx2-1) = x_fld(2,1,2:nx2,1) - x_fld(2,1,1:nx2-1,1)
      else
-        dx_fld(2,1:nx2) = 0.d0
+        dx_fld(2,1:nx2-1) = 0.d0
      end if
 
-     if( nx3 >= 2 ) then
-        dx_fld(3,2:nx3) = x_fld(3,1,2:nx2,1) - x_fld(3,1,1:nx2-1,1)
+     if (nx3 >= 2) then
+        dx_fld(3,1:nx3-1) = x_fld(3,1,1,2:nx3) - x_fld(3,1,1,1:nx3-1)
      else
-        dx_fld(3,1:nx3) = 0.d0
+        dx_fld(3,1:nx3-1) = 0.d0
      end if
 
 

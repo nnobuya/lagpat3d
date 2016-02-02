@@ -21,14 +21,14 @@ subroutine set_pt(istg, ti, ist_pt, id, dma, x_pt, v_pt, d_fld)
      write(100) nx1, nx2, nx3
      write(100) x_fld(1:ndim,1:nx1,1:nx2,1:nx3)
      write(100) d_fld(1:nx1,1:nx2,1:nx3)
-     write(100) dx_fld(1:ndim,1:max(max(nx1,nx2),nx3))
+     write(100) dx_fld(1,1:nx1), dx_fld(2,1:nx2), dx_fld(3,1:nx3)
      !--------------------------------
 
 
      x_pt   = 0.d0
-     nskip1 = nx1/npt_x1
-     nskip2 = nx2/npt_x2
-     nskip3 = nx3/npt_x3
+     nskip1 = nx1 /npt_x1
+     nskip2 = nx2 /npt_x2
+     nskip3 = nx3 /npt_x3
 
      ipt = 0
      dma = 0.d0
@@ -38,9 +38,10 @@ subroutine set_pt(istg, ti, ist_pt, id, dma, x_pt, v_pt, d_fld)
             ipt = ipt + 1
             if( ipt < npt )then
             x_pt(1:ndim,ipt) = x_fld(1:ndim,i,j,k)
-            dma(ipt) = dma(ipt) + d_fld(i,j,k)*dx_fld(1,i)*dble(nskip1) &
-                                              *dx_fld(2,j)*dble(nskip2) &
-                                              *dx_fld(3,k)*dble(nskip3)
+            dma(ipt) = d_fld(i,j,k) &
+                 & *dx_fld(1,i) *dble(nskip1) &
+                 & *dx_fld(2,j) *dble(nskip2) &
+                 & *dx_fld(3,k) *dble(nskip3)
 !            write(10000,'(99es12.3)')x_pt(1,ipt),x_pt(2,ipt),x_pt(3,ipt)
             end if
            end do
@@ -51,7 +52,7 @@ subroutine set_pt(istg, ti, ist_pt, id, dma, x_pt, v_pt, d_fld)
      ist_pt(1:npt)      = 0
      v_pt(1:ndim,1:npt) = 0.d0
 
-     if( ipt < npt )ist_pt(ipt+1:npt) = - 1
+     if(ipt < npt)ist_pt(ipt+1:npt) = - 1
 
 
      write(60,*)
@@ -61,10 +62,13 @@ subroutine set_pt(istg, ti, ist_pt, id, dma, x_pt, v_pt, d_fld)
      write(60,*)
 
      do ipt = 1, npt
-        write(60,'(4i10,1p10e14.5)') ipt, 1, 1, 1, dma(ipt), x_pt(1:ndim,ipt)
+        write(60,'(4i10, 1p, 10e14.5)') &
+             & ipt, 1, 1, 1, dma(ipt), x_pt(1:ndim,ipt)
      end do
 
      close(60)
+
+     write(*,*) nx1, nx2, nx3
 
      stop 'db: set_pt'
 

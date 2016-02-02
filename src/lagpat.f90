@@ -25,10 +25,10 @@ program lagpat
 
   use mod_cnst, only: npt, ndim, set_cnst
   use mod_set , only: int_t, i_test, last_lp, &
-       & d_fld, t_fld, ye_fld, en_fld, v_fld, v0_fld, &
+       & d_fld, t_fld, ye_fld, en_fld, v_fld, v0_fld, njobe, &
        & set_data
   use mod_fld   , only: dt_max, fld
-  use mod_data3D, only: njob, njobe, nsub_step
+  use mod_data3D, only: njob, nsub_step
 
   implicit none
 
@@ -57,7 +57,6 @@ program lagpat
 
 
   !..allocation
-
   call set_cnst
 
   allocate(ist_pt(1:npt), ipt(1:ndim,1:npt), id(1:ndim,1:npt), &
@@ -74,7 +73,6 @@ program lagpat
 
   close(41)
   close(42)
-  close(60)
   close(91)
 
 
@@ -86,6 +84,7 @@ program lagpat
   & x_pt(:,:), v_pt(:,:), d_fld(:,:,:))
   !  out: all
   stop 'end test db'
+
   call hokan_main(1, dt_max, ist_pt(:), ipt(:,:), x_pt(:,:), &
        & d_fld(:,:,:), t_fld(:,:,:), ye_fld(:,:,:), en_fld(:,:,:), &
        & v0_fld(:,:,:,:), v_fld(:,:,:,:), &

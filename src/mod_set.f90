@@ -11,6 +11,7 @@ module mod_set
        & set_param, nx1, nx2, nx3, &
        & d_fld, t_fld, ye_fld, en_fld, x_fld, dx_fld, v_fld, v0_fld, &
        & dir_path, eos_name, mass_name, &
+       & njobs, njobe, inode, &
        & set_data
 
   integer:: k_zoku, i_test, last_lp, int_t, int_x, nin, nou
@@ -22,6 +23,7 @@ module mod_set
   integer:: nx1, nx2, nx3
 
   !..Grid & field data (hydro results)
+  integer:: njobs, njobe, inode
   real(8), dimension(:,:,:)  , allocatable:: d_fld, t_fld, ye_fld, en_fld
   real(8), dimension(:,:)    , allocatable:: dx_fld(:,:)
   real(8), dimension(:,:,:,:), allocatable:: x_fld, v_fld, v0_fld
@@ -42,6 +44,8 @@ contains
     !..calculation Parametar form './in.dat'
     read(io,*)
     read(io,*) eos_name, mass_name
+    read(io,*)
+    read(io,*) njobs, njobe, inode
     read(io,*)
     read(io,*) dir_path
     read(io,*)
@@ -147,7 +151,6 @@ contains
     else
        dx_fld(3,1:nx3) = 0.d0
     end if
-
 
     !..message
     write(*,'("----- grid information -----")')
