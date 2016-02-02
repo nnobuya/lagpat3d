@@ -17,11 +17,11 @@ subroutine set_pt(istg, ti, ist_pt, id, dma, x_pt, v_pt, d_fld)
   if      ( k_zoku == 0 ) then
 
      !..tmp
-     write(100) npt_x1, npt_x2, npt_x3
-     write(100) nx1, nx2, nx3
-     write(100) x_fld(1:ndim,1:nx1,1:nx2,1:nx3)
-     write(100) d_fld(1:nx1,1:nx2,1:nx3)
-     write(100) dx_fld(1,1:nx1), dx_fld(2,1:nx2), dx_fld(3,1:nx3)
+     !write(100) npt_x1, npt_x2, npt_x3
+     !write(100) nx1, nx2, nx3
+     !write(100) x_fld(1:ndim,1:nx1,1:nx2,1:nx3)
+     !write(100) d_fld(1:nx1,1:nx2,1:nx3)
+     !write(100) dx_fld(1,1:nx1), dx_fld(2,1:nx2), dx_fld(3,1:nx3)
      !--------------------------------
 
 
@@ -70,7 +70,7 @@ subroutine set_pt(istg, ti, ist_pt, id, dma, x_pt, v_pt, d_fld)
 
      write(*,*) nx1, nx2, nx3
 
-     stop 'db: set_pt'
+     !stop 'db: set_pt'
 
   else if ( k_zoku == 1 ) then
 

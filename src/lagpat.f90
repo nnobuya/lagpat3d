@@ -81,9 +81,9 @@ program lagpat
   ! out: all
 
   call set_pt(istg, ti, ist_pt(:), id(:,:), dma(:), &
-  & x_pt(:,:), v_pt(:,:), d_fld(:,:,:))
+       & x_pt(:,:), v_pt(:,:), d_fld(:,:,:))
   !  out: all
-  stop 'end test db'
+  !stop 'end test db'
 
   call hokan_main(1, dt_max, ist_pt(:), ipt(:,:), x_pt(:,:), &
        & d_fld(:,:,:), t_fld(:,:,:), ye_fld(:,:,:), en_fld(:,:,:), &
