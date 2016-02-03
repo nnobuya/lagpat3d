@@ -43,6 +43,7 @@ contains
 
     !..calculation Parametar form './in.dat'
     read(io,*)
+    read(io,*)
     read(io,*) eos_name, mass_name
     read(io,*)
     read(io,*) njobs, njobe, inode
@@ -64,7 +65,7 @@ contains
     read(io,*)
     read(io,*) nout_lpt, n_anim
 
-    close(io)
+    !close(io)
 
     !..check
     if (x1_in > x1_out .or. x2_in > x2_out .or. x3_in > x3_out) then

@@ -14,16 +14,19 @@ module mod_cnst
 
 contains
 
-  subroutine set_cnst
+  subroutine set_cnst(io)
 
     implicit none
 
+    integer, intent(in):: io
+
 
     !..part. num. and dimension
-    ndim = 3
-    npt_x1 = 20
-    npt_x2 = 20
-    npt_x3 = 20
+    read(io,*)
+    read(io,*)
+    read(io,*) ndim
+    read(io,*)
+    read(io,*) npt_x1, npt_x2, npt_x3
 
     npt = npt_x1 *npt_x2 *npt_x3
 

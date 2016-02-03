@@ -57,7 +57,8 @@ program lagpat
 
 
   !..allocation
-  call set_cnst
+  call set_cnst(15)
+  close(15)
 
   allocate(ist_pt(1:npt), ipt(1:ndim,1:npt), id(1:ndim,1:npt), &
        & d_pt(1:npt), t_pt(1:npt), ye_pt(1:npt), en_pt(1:npt), &
