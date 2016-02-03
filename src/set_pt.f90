@@ -36,10 +36,11 @@ subroutine set_pt(istg, ti, ist_pt, id, dma, x_pt, v_pt, d_fld)
      write(60,*)
      write(60,*)
 
+     ipt = ipt + 1
      do k = 1, npt_x3
         do j = 1, npt_x2
            do i = 1, npt_x1
-
+              ipt = ipt + 1
               write(60,'(4i10, 1p, 10e14.5)') &
                    & ipt, i, j, k, dma(ipt), x_pt(1:ndim,ipt)
            end do

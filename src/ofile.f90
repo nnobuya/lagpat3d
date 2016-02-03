@@ -21,8 +21,8 @@ subroutine ofile
   ! ------------------------------------------------------------------ !
 
   !..settings
-  open(41, file = './res/part_mass.log', action='write')
-  open(42, file = './res/init_part.dat', action='write')
+  !open(41, file = './res/part_mass.log', action='write')
+  !open(42, file = './res/init_part.dat', action='write')
 
   !..particle motion
   open(60, file = './res/set.dat'  , action = 'write')
@@ -39,6 +39,7 @@ subroutine ofile
 
   !..log files
   open(70, file = './res/condition.log', action = 'write')
+  open(71, file = './res/pt_chk.dat'   , action = 'write')
 
 
   !! final status

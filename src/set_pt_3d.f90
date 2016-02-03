@@ -1,10 +1,11 @@
 subroutine pt_set_3d(ndim, nx1, nx2, nx3, npt, npt_x1, npt_x2, npt_x3, &
      & x_fld, d_fld, x_pt, dma)
 
+  use mod_cnst, only: rm_sol
+
   implicit none
 
   !..param.
-  real(8), parameter:: rm_sol = 1.989d33
   real(8), parameter:: de_high = 1.e10
   logical, parameter:: debug = .false.
 
@@ -24,7 +25,6 @@ subroutine pt_set_3d(ndim, nx1, nx2, nx3, npt, npt_x1, npt_x2, npt_x3, &
 
   integer:: i11, i12, i21, i22, i31, i32
   integer:: i, j, k, l, ipt
-
 
   write(*,*)
   write(*,'(" ---------------", "pt_set_3d(): setting tracer particles", &
@@ -181,10 +181,12 @@ subroutine pt_set_3d(ndim, nx1, nx2, nx3, npt, npt_x1, npt_x2, npt_x3, &
   end do
 
 
-
+  ipt = 0
   do k = 1, npt_x3
      do j = 1, npt_x2
         do i = 1, npt_x1
+
+           ipt = ipt + 1
 
            i11 = i1_in(i)
            i12 = i1_ou(i)
