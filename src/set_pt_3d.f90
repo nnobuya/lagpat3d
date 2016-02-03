@@ -127,7 +127,7 @@ subroutine pt_set_3d(ndim, nx1, nx2, nx3, npt, npt_x1, npt_x2, npt_x3, &
   nd_x2 = nx2 /npt_x2
   nd_x3 = nx3 /npt_x3
 
-  write(70,'("# pt-grid x1")')
+  write(71,'("# pt-grid x1")')
   do i = 1, npt_x1
      if (i == 1) then
         i1_in(i) = 1
@@ -141,11 +141,11 @@ subroutine pt_set_3d(ndim, nx1, nx2, nx3, npt, npt_x1, npt_x2, npt_x3, &
         i1_ou(i) = i1_in(i) + nd_x1 - 1
      end if
 
-     write(70,'(4i10)') i, i1_in(i), i1_ou(i), i1_ou(i) - i1_in(i) +1
+     write(71,'(4i10)') i, i1_in(i), i1_ou(i), i1_ou(i) - i1_in(i) +1
   end do
 
 
-  write(70,'("# pt-grid x2")')
+  write(71,'("# pt-grid x2")')
   do i = 1, npt_x2
      if (i == 1) then
         i2_in(i) = 1
@@ -159,11 +159,11 @@ subroutine pt_set_3d(ndim, nx1, nx2, nx3, npt, npt_x1, npt_x2, npt_x3, &
         i2_ou(i) = i2_in(i) + nd_x2 - 1
      end if
 
-     write(70,'(4i10)') i, i2_in(i), i2_ou(i), i2_ou(i) - i2_in(i) +1
+     write(71,'(4i10)') i, i2_in(i), i2_ou(i), i2_ou(i) - i2_in(i) +1
   end do
 
 
-  write(70,'("# pt-grid x3")')
+  write(71,'("# pt-grid x3")')
   do i = 1, npt_x3
      if (i == 1) then
         i3_in(i) = 1
@@ -177,7 +177,7 @@ subroutine pt_set_3d(ndim, nx1, nx2, nx3, npt, npt_x1, npt_x2, npt_x3, &
         i3_ou(i) = i3_in(i) + nd_x3 - 1
      end if
 
-     write(70,'(4i10)') i, i3_in(i), i3_ou(i), i3_ou(i) - i3_in(i) +1
+     write(71,'(4i10)') i, i3_in(i), i3_ou(i), i3_ou(i) - i3_in(i) +1
   end do
 
 

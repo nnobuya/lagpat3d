@@ -29,24 +29,30 @@ subroutine set_pt(istg, ti, ist_pt, id, dma, x_pt, v_pt, d_fld)
      ist_pt(1:npt)      = 0
      v_pt(1:ndim,1:npt) = 0.d0
 
+     do ipt = 1, npt
+        if (dma(ipt) <= 0.d0) ist_pt(ipt) = -1
+     end do
 
-     write(60,*)
-     write(60,'(4i10)') npt, nx1, nx2, nx3
-     write(60,*)
-     write(60,*)
-     write(60,*)
 
-     ipt = ipt + 1
+     write(70,*) '#      npt,      nx1,      nx2,      nx3,'
+     write(70,'(4i10)') npt, nx1, nx2, nx3
+     write(70,*) '#'
+
+     ipt = 0
      do k = 1, npt_x3
         do j = 1, npt_x2
            do i = 1, npt_x1
               ipt = ipt + 1
-              write(60,'(4i10, 1p, 10e14.5)') &
+
+              id(1,ipt) = i
+              id(2,ipt) = j
+              id(3,ipt) = k
+              write(70,'(4i10, 1p, 10e14.5)') &
                    & ipt, i, j, k, dma(ipt), x_pt(1:ndim,ipt)
            end do
         end do
      end do
-     close(60)
+     close(70)
 
   else if ( k_zoku == 1 ) then
 
@@ -64,8 +70,6 @@ subroutine set_pt(istg, ti, ist_pt, id, dma, x_pt, v_pt, d_fld)
 
   end if
 
-
-  id(1:ndim,1:npt) = 0
 
   return
 

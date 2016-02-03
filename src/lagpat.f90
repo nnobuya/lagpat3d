@@ -98,6 +98,12 @@ program lagpat
   dt0 = dt_max
   dt  = dt_max
 
+
+  call fini_out(40, istg + 1, ti, ist_pt(:), id(:,:), dma(:), &
+       & x_pt(:,:), v_pt(:,:), d_pt(:), t_pt(:), ye_pt(:), en_pt(:) )
+
+  close(40)
+
   if( i_test == 1 ) stop '### finish test  ###'
 
 
@@ -227,10 +233,11 @@ program lagpat
   write(*,'(a20,i10)') 'calculation step:', istg
   write(*,'(a20,i10)') 'output:', n_anim_out
 
-  call fini_out(istg, ti, ist_pt(:), id(:,:), dma(:), x_pt(:,:), v_pt(:,:))
 
-  close(90)
+  call fini_out(41, istg, ti, ist_pt(:), id(:,:), dma(:), &
+       & x_pt(:,:), v_pt(:,:), d_pt(:), t_pt(:), ye_pt(:), en_pt(:) )
 
+  close(41)
 
   !     closing                                                        !
   ! ------------------------------------------------------------------ !

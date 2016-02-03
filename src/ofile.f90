@@ -20,34 +20,22 @@ subroutine ofile
   !     output                                                         !
   ! ------------------------------------------------------------------ !
 
-  !..settings
-  !open(41, file = './res/part_mass.log', action='write')
-  !open(42, file = './res/init_part.dat', action='write')
+  !..pt all
+  open(40, file = './res/init_part.dat', action = 'write')
+  open(41, file = './res/fini_part.dat', action = 'write')
 
-  !..particle motion
-  open(60, file = './res/set.dat'  , action = 'write')
-
-  !! position
-  open(61, file = './res/hydr/hydr_lpt.0000001.dat', &
+  !..position
+  open(61, file = './res/hydr/hydr_00001.dat', &
        & form = 'unformatted', action = 'write')
 
   !..movie
   open(62, file = './res/anim_set.dat', action = 'write')
   open(63, file = './res/anim_ti.dat' , action = 'write')
-  open(64, file = './res/anim/anim.0000001.dat', action = 'write')
-
+  open(64, file = './res/anim/anim_00001.dat', action = 'write')
 
   !..log files
-  open(70, file = './res/condition.log', action = 'write')
-  open(71, file = './res/pt_chk.dat'   , action = 'write')
-
-
-  !! final status
-  open(90, file = './res/fini.dat', action = 'write')
-
-  open(92, file = './res/set.ns.dat' , action = 'write')
-  open(93, file = './res/fini.ns.dat', action = 'write')
-
+  open(70, file = './res/part_set.log' , action = 'write')
+  open(71, file = './res/condition.log', action = 'write')
 
   !     output                                                         !
   ! ------------------------------------------------------------------ !
