@@ -36,12 +36,12 @@ program lagpat
   integer, allocatable:: ist_pt(:), ipt(:,:), id(:,:)
   real(8), allocatable:: d_pt(:), t_pt(:), ye_pt(:), en_pt(:), &
        & x_pt(:,:), v_pt(:,:), v_pt_p(:,:,:), dma(:)
+  logical:: run = .true.
 
   !..local
   integer:: istg, n_anim_out = 0
   integer:: ier
   real(8):: ti, dt0, dt_in, dt = 0.d0
-
 
   ! ------------------------------------------------------------------ !
   !                                                                    !
@@ -70,7 +70,7 @@ program lagpat
   !..set field data
   njob      = njobe
   nsub_step = 1
-  call sekig_3D(0,ti)
+  call sekig_3D(0,ti,run)
 
   close(41)
   close(42)
@@ -170,7 +170,7 @@ program lagpat
           & en_fld(:,:,:), v_fld(:,:,:,:), v0_fld(:,:,:,:))
      !  out: all
 
-     if( ier /= 0 .or. (last_lp > 0 .and. istg > last_lp) ) exit main_lp
+     if(ier /= 0 .or. (last_lp > 0 .and. istg > last_lp)) exit main_lp
 
      !     read                                                        !
      ! --------------------------------------------------------------- !

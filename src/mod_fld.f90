@@ -114,6 +114,7 @@ contains
     use mod_cnst, only: ndim
     use mod_set , only: nx1, nx2, nx3, i_test, x_fld
     use mod_data3d
+
     implicit none
 
     integer, intent(out):: ier, istep
@@ -122,10 +123,12 @@ contains
          & ye_fld(nx1,nx2,nx3), en_fld(nx1,nx2,nx3), &
          & v_fld(ndim,nx1,nx2,nx3)
 
+    logical:: run
 
-    ier   = 0
+
     istep = 0
-    call sekig_3D(1,ti)
+
+    call sekig_3D(1, ti, run)
     !--- copy for particle tracer
     d_fld (  1:nx1,1:nx2,1:nx3) = dble( qrho(nsub_step,1:nx1,1:nx2,1:nx3,lv_trc) )
     t_fld (  1:nx1,1:nx2,1:nx3) = dble( tem (nsub_step,1:nx1,1:nx2,1:nx3,lv_trc) )
@@ -134,6 +137,13 @@ contains
     v_fld (3,1:nx1,1:nx2,1:nx3) = dble( vlz (nsub_step,1:nx1,1:nx2,1:nx3,lv_trc) )
     ye_fld(  1:nx1,1:nx2,1:nx3) = dble( ye  (nsub_step,1:nx1,1:nx2,1:nx3,lv_trc) )
     en_fld(  1:nx1,1:nx2,1:nx3) = dble( sen (nsub_step,1:nx1,1:nx2,1:nx3,lv_trc) )
+
+    if (run) then
+       ier = 0
+    else
+       ier = -1
+    end if
+          
 
     return
 

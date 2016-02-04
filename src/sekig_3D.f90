@@ -1,4 +1,4 @@
-subroutine sekig_3D(iflag0,t)
+subroutine sekig_3D(iflag0, t, run)
 
   use mod_unit, only: rho_uni, v_uni, tem_uni, r_uni, t_uni
   use mod_cnst, only: ndim
@@ -14,14 +14,19 @@ subroutine sekig_3D(iflag0,t)
 
   implicit none
 
+  !..io
+  integer, intent(in)   :: iflag0
+  real(8), intent(inout):: t
+  logical, intent(out)  :: run
+
   integer:: omp_get_thread_num, omp_get_max_threads
   integer, save:: j1ma, k1ma, l1ma, lv_max, jr34_min, jr34_max, &
        & kr34_min, kr34_max, lr34_min, lr34_max, job34
 
   !..local
-  integer:: iflag0, iend_thr, imax, imin, irank, ista_thr
+  integer:: iend_thr, imax, imin, irank, ista_thr
   integer:: iwork1, iwork2
-  real(8):: t, dlx0
+  real(8):: dlx0
 
   integer:: i, j, k, l, ii, nn, nphi, nrr, nth, nx_max
   integer:: j1, j2, j3, k1, k2, k3, l1, l2, l3
@@ -41,6 +46,7 @@ subroutine sekig_3D(iflag0,t)
   !..file names
   character*10:: no_index, no_index2
 
+  run = .true.
 
   if (iflag0 /= 0) then
 
@@ -228,7 +234,8 @@ subroutine sekig_3D(iflag0,t)
         njob      = njob - 1
         if( njob < njobs )then
            write(*,'(" No more fluid data")')
-           stop
+           run = .false.
+           !stop
         endif
  
      endif
@@ -236,7 +243,7 @@ subroutine sekig_3D(iflag0,t)
   endif
 
    !---- from nishimura set_data (excute only for initial)
-  if( iflag0 == 0 )then
+  if (iflag0 == 0 .and. run) then
 
      allocate(itable(0:jproc-1,0:kproc-1,0:lproc-1))
      irank = 0 
