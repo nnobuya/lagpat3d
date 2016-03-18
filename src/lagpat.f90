@@ -72,7 +72,6 @@ program lagpat
   nsub_step = 1
   call sekig_3D(0,ti,run)
 
-  close(41)
   close(42)
   close(91)
 
@@ -226,9 +225,9 @@ program lagpat
   !     closing                                                        !
   ! ------------------------------------------------------------------ !
 
-  write(65,'(a20,i10)') 'calculation step:', istg
-  write(65,'(a20,i10)') 'output:', n_anim_out
-  close(65)
+  !write(65,'(a20,i10)') 'calculation step:', istg
+  !write(65,'(a20,i10)') 'output:', n_anim_out
+  !close(65)
 
   write(*,'(a20,i10)') 'calculation step:', istg
   write(*,'(a20,i10)') 'output:', n_anim_out
