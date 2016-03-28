@@ -9,7 +9,7 @@ program traj_rev
   real(4)  , parameter:: te_nse = 0.5 *r_mev
 
   integer, parameter:: npt0  = 100
-  logical, parameter:: debug = .true.
+  logical, parameter:: debug = .false.
 
   integer:: npt, idt_ini, idt_fin
 
@@ -74,31 +74,29 @@ program traj_rev
      open(60,file = op_file, action = 'write')
 
      write(60,'("#   Time", 11x, "Density", 8x, "T", 14x, &
-          & "Entropy", 8x, "Ye", 13x, "Radius     ")')
+          & "Entropy", 8x, "Ye", 13x, "X", 14x, "Y", 14x, &
+          & "Z", 14x, "Radius     ")')
      lp_pt_evol:do idt = idt_fin, idt_ini, -1
         rad = sqrt(sum(x_pt(1:ndim,i,idt) *x_pt(1:ndim,i,idt)))
         write(60,'(1p, *(e15.7))') &
            & ti(idt) - ti(idt_fin), &
-           & d_pt(i,idt), t_pt(i,idt), en_pt(i,idt), ye_pt(i,idt), rad
+           & d_pt(i,idt), t_pt(i,idt), en_pt(i,idt), ye_pt(i,idt), &
+           & x_pt(1:ndim,i,idt), rad
      end do lp_pt_evol
      close(60)
 
 
      !..Ye-S map at 0.5 MeV
-
-     if (maxval(t_pt(i,idt_ini:idt_fin)) < te_nse) then
-        print *, t_pt(i,idt_fin), maxval(t_pt(i,idt_ini:idt_fin))
-     else
-        lp_search: do idt = idt_fin, idt_ini, -1
-           if (t_pt(i,idt) >= te_nse) exit lp_search
-        end do lp_search
-
-        print *, idt
-
+     if (.false.) then
+        if (maxval(t_pt(i,idt_ini:idt_fin)) < te_nse) then
+           print *, t_pt(i,idt_fin), maxval(t_pt(i,idt_ini:idt_fin))
+        else
+           lp_search: do idt = idt_fin, idt_ini, -1
+              if (t_pt(i,idt) >= te_nse) exit lp_search
+           end do lp_search
+           print *, idt
+        end if
      end if
-
-
-
 
 
   end do lp_write_data
