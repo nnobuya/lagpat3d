@@ -5,9 +5,11 @@ program traj_rev
   !..param.
   integer  , parameter:: ndim = 3
   character, parameter:: bin*11 = 'unformatted'
+  real(4)  , parameter:: r_mev  = 1.16e10
+  real(4)  , parameter:: te_nse = 0.5 *r_mev
 
   integer, parameter:: npt0  = 100
-  logical, parameter:: debug = .false.
+  logical, parameter:: debug = .true.
 
   integer:: npt, idt_ini, idt_fin
 
@@ -20,8 +22,9 @@ program traj_rev
   character:: op_file*100
 
 
-
+  !..open files
   open(50,file = './res/part_set.log', action = 'read')
+
 
   read(50,*)
   read(50,*) npt, i, j, k
@@ -55,7 +58,6 @@ program traj_rev
 
      close(50)
 
-
   end do lp_read_hydr
 
 
@@ -73,15 +75,31 @@ program traj_rev
 
      write(60,'("#   Time", 11x, "Density", 8x, "T", 14x, &
           & "Entropy", 8x, "Ye", 13x, "Radius     ")')
-
      lp_pt_evol:do idt = idt_fin, idt_ini, -1
         rad = sqrt(sum(x_pt(1:ndim,i,idt) *x_pt(1:ndim,i,idt)))
         write(60,'(1p, *(e15.7))') &
            & ti(idt) - ti(idt_fin), &
            & d_pt(i,idt), t_pt(i,idt), en_pt(i,idt), ye_pt(i,idt), rad
      end do lp_pt_evol
-
      close(60)
+
+
+     !..Ye-S map at 0.5 MeV
+
+     if (maxval(t_pt(i,idt_ini:idt_fin)) < te_nse) then
+        print *, t_pt(i,idt_fin), maxval(t_pt(i,idt_ini:idt_fin))
+     else
+        lp_search: do idt = idt_fin, idt_ini, -1
+           if (t_pt(i,idt) >= te_nse) exit lp_search
+        end do lp_search
+
+        print *, idt
+
+     end if
+
+
+
+
 
   end do lp_write_data
 
