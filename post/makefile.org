@@ -1,7 +1,12 @@
-fc	:= ifort
-#fc	:= gfortran
+#fc	:= ifort
+fc	:= gfortran
 
-fflags	:= -O3
+ifeq ($(FC), ifort)
+	fflags	:= -O3 -convert big_endian -openmp
+        #-CB -traceback -g #-check all -warn all -traceback
+else
+	fflags	:= -O3 -fopenmp -fconvert=big-endian
+endif
 
 src	:= $(wildcard *.f90)
 
