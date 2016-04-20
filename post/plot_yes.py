@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
 
@@ -59,6 +61,8 @@ for mdl in range(len(mdl_list)):
 
     for n in range(len(fac[mdl])):
 
+        print(str(n) + ' / ' + str(len(fac[mdl])))
+
         for i1 in range(nye - 1):
             if ye_grid[i1] <= ye[mdl][n] and ye[mdl][n] < ye_grid[i1 + 1]:
                 break
@@ -71,6 +75,8 @@ for mdl in range(len(mdl_list)):
         pt_fact[i2][i1].append(fac[mdl][n])
         fac_grid[i2][i1] += fac[mdl][n]
 
+
+    print('   output data in ./ej_pt_list.dat')
     outf   = open('./ej_pt_list.dat', 'w')
     ncount = 0
     for i in range(nye):
@@ -80,7 +86,7 @@ for mdl in range(len(mdl_list)):
                 outf.write('{0:11.3e}{1:11.3e}'.format(ye_grid[i],s_grid[j]))
                 outf.write('{0:11.3e}'.format(fac_grid[j][i]) + '  |')
                 for n in range(len(pt_grid[j][i])):
-                    outf.write('{0:>7}{1:14.5e}'.
+                    outf.write('{0:>10}{1:14.5e}'.
                                format(pt_grid[j][i][n], pt_fact[j][i][n]))
                 outf.write('\n')
                 ncount += 1

@@ -68,7 +68,7 @@ for i in range(len(n_pt)):
 
     for j in range(nout):
         n += 1
-        out.write('{0:>7d}{1:>7}'.format(n, n_pt[i][j]))
+        out.write('{0:>7d}{1:>10}'.format(n, n_pt[i][j]))
         out.write('{0:10.4f}{1:10.2f}'.format(ye[i],et[i]))
         out.write('{0:20.10e}'.format(fac[i] *sep[j]))
         out.write('\n')
