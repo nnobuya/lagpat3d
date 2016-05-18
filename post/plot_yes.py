@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
 
 import ConfigParser
@@ -31,14 +32,15 @@ s_grid  = np.linspace(0.0, 60.0, ns )
 
 
 #################################################################
-ye = []; s = []; ma = []; fac = []
+ye = []; s = []; ma = []; fac = []; no = []
 
 for mdl in mdl_list:
     print('  read data from ' + mdl)
-    ye_in = []; s_in = []; ma_in = []
+    ye_in = []; s_in = []; ma_in = []; no_in = []
     for line in open('./res/init_part.dat'):
         dat = line.split()
         if dat[0] != '#' and int(dat[4]) != -1:
+            no_in.append(int(dat[0]))
             ye_in.append(float(dat[14]))
             s_in.append( float(dat[15]))
             ma_in.append(float(dat[5]))
@@ -46,6 +48,7 @@ for mdl in mdl_list:
     total  = sum(ma_in)
     fac_in = [ r1 /total for r1 in ma_in ]
 
+    no.append(no_in)
     ye.append(ye_in)
     s.append(s_in)
     ma.append(ma_in)
@@ -71,7 +74,7 @@ for mdl in range(len(mdl_list)):
             if s_grid[i2] <= s[mdl][n] and s[mdl][n] < s_grid[i2 + 1]:
                 break
 
-        pt_grid[i2][i1].append(n+1)
+        pt_grid[i2][i1].append(no[mdl][n])
         pt_fact[i2][i1].append(fac[mdl][n])
         fac_grid[i2][i1] += fac[mdl][n]
 
@@ -104,13 +107,13 @@ for mdl in range(len(mdl_list)):
 
     col_range = np.linspace(-5.0, -1.0, 5)
 
-    xmajorLocator   = MultipleLocator(0.1)
-    xmajorFormatter = FormatStrFormatter('%3.1f')
-    xminorLocator   = MultipleLocator(0.05)
+    #xmajorLocator   = MultipleLocator(0.1)
+    #xmajorFormatter = FormatStrFormatter('%3.1f')
+    #xminorLocator   = MultipleLocator(0.05)
 
-    ymajorLocator   = MultipleLocator(10)
-    ymajorFormatter = FormatStrFormatter('%d')
-    yminorLocator   = MultipleLocator(5)
+    #ymajorLocator   = MultipleLocator(10)
+    #ymajorFormatter = FormatStrFormatter('%d')
+    #yminorLocator   = MultipleLocator(5)
 
     fig, ax = plt.subplots()
     fig, ay = plt.subplots()
@@ -123,13 +126,13 @@ for mdl in range(len(mdl_list)):
     plt.xticks([0.2, 0.3, 0.4, 0.5])
     plt.yticks([10, 20, 30])
 
-    ax.xaxis.set_major_locator(xmajorLocator)
-    ax.xaxis.set_major_formatter(xmajorFormatter)
-    ax.xaxis.set_minor_locator(xminorLocator)
+    #ax.xaxis.set_major_locator(xmajorLocator)
+    #ax.xaxis.set_major_formatter(xmajorFormatter)
+    #ax.xaxis.set_minor_locator(xminorLocator)
 
-    ay.yaxis.set_major_locator(ymajorLocator)
-    ay.yaxis.set_major_formatter(ymajorFormatter)
-    ay.yaxis.set_minor_locator(yminorLocator)
+    #ay.yaxis.set_major_locator(ymajorLocator)
+    #ay.yaxis.set_major_formatter(ymajorFormatter)
+    #ay.yaxis.set_minor_locator(yminorLocator)
 
 
     plt.contourf(x1, x2, fac_grid, col_range, cmap = 'hot_r')
@@ -174,13 +177,13 @@ for i in range(len(mdl_list)):
              alpha = 0.5, weights = fac[i], label = mdl_list[i])
 
 
-xmajorLocator   = MultipleLocator(10)
-xmajorFormatter = FormatStrFormatter('%d')
-xminorLocator   = MultipleLocator(5)
+#xmajorLocator   = MultipleLocator(10)
+#xmajorFormatter = FormatStrFormatter('%d')
+#xminorLocator   = MultipleLocator(5)
 
-ax.xaxis.set_major_locator(xmajorLocator)
-ax.xaxis.set_major_formatter(xmajorFormatter)
-ax.xaxis.set_minor_locator(xminorLocator)
+#ax.xaxis.set_major_locator(xmajorLocator)
+#ax.xaxis.set_major_formatter(xmajorFormatter)
+#ax.xaxis.set_minor_locator(xminorLocator)
 
 plt.xticks([10, 20, 30, 40])
 

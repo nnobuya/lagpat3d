@@ -31,7 +31,7 @@ program traj_rev
   close(50)
 
   idt_ini = 1
-  idt_fin = 162
+  idt_fin = 156
 
   allocate( istg(idt_ini:idt_fin), ti(idt_ini:idt_fin), dt(idt_ini:idt_fin), &
        & ist_pt(1:npt,idt_ini:idt_fin), ipt(1:ndim,1:npt,idt_ini:idt_fin), &
