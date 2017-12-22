@@ -46,8 +46,7 @@ subroutine hokan_main( mode, dt, ist_pt, ipt, x_pt, &
 
      if ( int_t == 1 ) then
 
-        x_pt_p(1,i) = x_pt(1,i) + dt *v_pt(1,i)
-        x_pt_p(2,i) = x_pt(2,i) + dt *v_pt(2,i) /x_pt_p(1,i)
+        x_pt_p(1:ndim,i) = x_pt(1:ndim,i) + dt *v_pt(1:ndim,i)
 
         call search( mode, x_pt_p(:,i), v_pt(:,i), fac_p(:,i), ipt_p(:,i) )
         !  out: fac_p;     inout: ipt_p
@@ -57,8 +56,7 @@ subroutine hokan_main( mode, dt, ist_pt, ipt, x_pt, &
 
      else if ( int_t == 2 ) then
 
-        x_pt_p(1,i) = x_pt(1,i) + 0.5d0 *dt *v_pt(1,i)
-        x_pt_p(2,i) = x_pt(2,i) + 0.5d0 *dt *v_pt(2,i) /x_pt_p(1,i)
+        x_pt_p(1:ndim,i) = x_pt(1:ndim,i) + 0.5d0 *dt *v_pt(1:ndim,i)
 
         call search( mode, x_pt_p(:,i), v_pt(:,i), fac_p(:,i), ipt_p(:,i) )
         !  out: fac_p;     inout: ipt_p

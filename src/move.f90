@@ -42,6 +42,7 @@ subroutine move( dt, dt0, ist_pt, v_pt, v_pt_p, x_pt )
      x_pt(1,i) = x_pt(1,i) + v_comb(1) *dt
      if ( nx2 >= 2 ) x_pt(2,i) = x_pt(2,i) + v_comb(2) *dt
      if ( nx3 >= 2 ) x_pt(3,i) = x_pt(3,i) + v_comb(3) *dt
+
      !..avoid negative z
      x_pt(3,i) = max(0.d0, x_pt(3,i))
 
