@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 import numpy as np
 import matplotlib
@@ -7,12 +7,12 @@ import matplotlib.pyplot as plt
 
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
 
-import ConfigParser
+import configparser
 
 
 #### read config file
 
-config_fl = ConfigParser.SafeConfigParser()
+config_fl = configparser.ConfigParser()
 config_fl.read('./in/config.in')
 
 mdl_list = config_fl.get('plot', 'model')

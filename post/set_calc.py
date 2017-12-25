@@ -1,11 +1,11 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
-import ConfigParser
+import configparser
 import numpy as np
 
 #### read config file
 
-config_fl = ConfigParser.SafeConfigParser()
+config_fl = configparser.ConfigParser()
 config_fl.read('./in/config.in')
 
 n_adopt = config_fl.getint('set_calc', 'n_adopt')
@@ -14,14 +14,14 @@ select  = config_fl.getint('set_calc', 'select')
 print('  - adopts ' + str(n_adopt) + ' particles in each YeS cell')
 if select == 1: print('  - re-arrange the order of particles by masse factors')
 
-
 n_pt = []; f_pt = []; ye = []; et = []; fac = []
 
 for line in open('ej_pt_list.dat'):
     dat = line.split()
 
-    ndat = (len(dat) - 6) /2
+    ndat = int( (len(dat) - 6) /2 )
     n_tmp0 = []; f_tmp0 =[]
+
     for i in range(ndat):
         n_tmp0.append(dat[6 + 2*i])
         f_tmp0.append(dat[6 + 2*i + 1])
